@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOKOCHAN ARIBOR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ddee43;
+            --secondary: #dd940d;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ff9e00;
+            --admin-bg: #4361ee;
+            --admin-dark: #3f37c9;
+            --gallery-bg: #1a2a6c;
+            --social-bg: #3a0ca3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Secciones */
+        section {
+            display: none;
+            padding: 40px 0;
+            min-height: 80vh;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* Hero Seccion */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://imgs.search.brave.com/5iNfxvaBzbzjHhjM0mlWKind23gWhT3kZAMZYUkMBQc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Zm9vZHJlcHVibGlj/LmNvbS9pbWcvZ2Fs/bGVyeS9yYW5raW5n/LWV2ZXJ5LW1hcnVj/aGFuLXJhbWVuLWZs/YXZvci1mcm9tLXdv/cnN0LXRvLWJlc3Qv/Ni1iZWVmLTE3MDEx/MDQ3NjEuanBn') center/cover no-repeat;
+            opacity: 0.08;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--dark);
+            opacity: 0.9;
+        }
+
+        .tagline {
+            background: linear-gradient(45deg, var(--accent), #ff2d95);
+            -webkit-background-clip: text;
+            background-clip: text; 
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        /* seccion de Productos */
+        .products {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .product-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .product-description {
+            color: #6c757d;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .product-button {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-button:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Links externos */
+        .external-link {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #3a0ca3, #7209b7);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 50px 0;
+        }
+
+        .external-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://imgs.search.brave.com/J_oQFeeIKIimiiGLVqLnOmM_9fQM3-Ojqpqr-DCFvcY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzE4LzRk/L2E3LzE4NGRhNzVm/YmZlNTNhNzQ5OWQy/MDU1OWViYjg5Njk5/LmpwZw') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .external-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .external-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .external-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .external-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .external-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            background: var(--light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Estilos para la sección de pedidos */
+        .pedidos-section {
+            background: var(--light);
+        }
+        
+        .pedidos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pedidos-header {
+            text-align: center;
+            padding: 25px 0;
+            margin-bottom: 30px;
+            background: var(--admin-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: white;
+        }
+        
+        .pedidos-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .pedidos-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .card h2 {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--admin-bg);
+            color: var(--admin-bg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .product-section {
+            margin-bottom: 25px;
+        }
+        
+        .product-section h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .product {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+        
+        .product:hover {
+            border-color: var(--admin-bg);
+            transform: translateY(-3px);
+        }
+        
+        .product.selected {
+            border-color: var(--admin-bg);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .product-img-sm {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .product h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .product .price {
+            font-weight: bold;
+            color: var(--admin-bg);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: var(--admin-bg);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn {
+            background: var(--admin-bg);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn:hover {
+            background: var(--admin-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-submit {
+            background: var(--success);
+        }
+        
+        .btn-submit:hover {
+            background: #388e3c;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-admin {
+            background: var(--dark);
+        }
+        
+        .btn-admin:hover {
+            background: #343a40;
+            box-shadow: 0 5px 15px rgba(33, 37, 41, 0.3);
+        }
+        
+        .admin-section {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .admin-section h2 {
+            color: white;
+            border-bottom-color: var(--admin-bg);
+        }
+        
+        .password-input {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
+        
+        #orderSummary {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            min-height: 150px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .order-item {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-info {
+            flex: 1;
+        }
+        
+        .order-customer {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .order-products {
+            color: #e9ecef;
+            font-size: 0.9rem;
+        }
+        
+        .order-meta {
+            text-align: right;
+            margin-left: 10px;
+        }
+        
+        .order-price {
+            font-weight: bold;
+            color: #4cc9f0;
+        }
+        
+        .order-date {
+            font-size: 0.8rem;
+            color: #adb5bd;
+        }
+        
+        .order-total {
+            font-weight: bold;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-between;
+            color: white;
+        }
+        
+        .no-orders {
+            text-align: center;
+            padding: 30px 15px;
+            opacity: 0.7;
+        }
+        
+        .no-orders i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.3);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .counter-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: var(--admin-bg);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .counter-btn:hover {
+            background: var(--admin-dark);
+            transform: scale(1.1);
+        }
+        
+        .counter-value {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* Estilos para la galería */
+        .gallery-section {
+            background: linear-gradient(135deg, var(--gallery-bg), #186ce1, var(--gallery-bg));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        .gallery-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gallery-header {
+            margin-bottom: 30px;
+        }
+        
+        .gallery-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            background: linear-gradient(to right, #0a1ce0, #da1b60);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .gallery-view {
+            position: relative;
+            margin: 0 auto 30px;
+            max-width: 800px;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev-btn {
+            left: 20px;
+        }
+        
+        .next-btn {
+            right: 20px;
+        }
+        
+        .image-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+            transform: scale(1.1);
+            border-color: #1463c3;
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        
+        .product-info h2 {
+            color: #ff8a00;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            width: 180px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature i {
+            font-size: 2rem;
+            color: #ff8a00;
+            margin-bottom: 10px;
+        }
+        
+        .feature h3 {
+            color: #ff8a00;
+            margin-bottom: 8px;
+        }
+        
+        .feature p {
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+        
+        .gallery-footer {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Botón de volver */
+        .back-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .back-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Sección de redes sociales */
+        .socials-section {
+            background: linear-gradient(135deg, var(--social-bg), #7209b7);
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .social-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .social-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-link {
+            display: inline-block;
+            background: white;
+            color: var(--social-bg);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .map-container {
+            margin-top: 50px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            height: 400px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Sección de referencias */
+        .references-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        
+        .references-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .references-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .video-container {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .gallery-column {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .references-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-view {
+                height: 400px;
+            }
+            
+            .gallery-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 10px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-view {
+                height: 300px;
+            }
+            
+            .gallery-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .thumbnails {
+                gap: 8px;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 45px;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>LOKOCHAN ARIBOR</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
+                    <li><a href="#" onclick="showSection('productos')">Productos</a></li>
+                    <li><a href="#" onclick="showSection('pedidos')">Compra Ya</a></li>
+                    <li><a href="#" onclick="showSection('redes-sociales')">Nuestras redes sociales</a></li>
+                    <li><a href="#" onclick="showSection('referencias')">Referencias de Galería</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Sección de inicio -->
+    <section id="inicio" class="active">
+        <div class="container">
+            <div class="hero">
+                <div class="tagline">Novedades de Hoy</div>
+                <h1>Aperitivos a su antojo</h1>
+                <p>Descubre nuestra colección de productos Loookos y bebidas especiales</p>
+            </div>
+            
+            <div class="external-link">
+                <div class="container external-content">
+                    <h2 class="external-title">Visita Nuestra Tienda Oficial</h2>
+                    <p class="external-text">Descubre toda nuestra línea de productos, en nuestra tienda oficial.</p>
+                    <a href="#" onclick="showSection('pedidos')" class="external-button">Ir a la Tienda <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="external-link">
+                <div class="container external-content">
+                    <a href="https://www.instagram.com/lokochan_aribor/?next=%2F" target="_blank" class="external-button">Siguenos en instagram!!!<i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de productos -->
+    <section id="productos">
+        <div class="container">
+            <div class="products">
+                <h2 class="section-title">Nuestros productos LOOOKOS!!</h2>
+                <div class="products-grid">
+                    <!-- Producto 1 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://imgs.search.brave.com/j9i8sBYGjg5wOC-KHmUQyVcJHkrGebuawMa1zQYaSEU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzc5NDU5OC1NTEM4/NDc0NDU4MzM2OF8w/NTIwMjUtVi1maWRl/b3MtaW5zdGFudGFu/ZW9zLW1hcnVjaGFu/LWNhbWFyb24tY2hp/bGUtcGlxdWluLTY0/LWcud2VicA">
+                        </div>
+                        <div class="product-content">
+                            <div class="product-category">FIDEOS INSTANTANEOS</div>
+                            <h3 class="product-name">MARUCHAN PIKIN</h3>
+                            <p class="product-description">El Sabor del Camarón y el Chile Piquín con especias picantes, saborizantes naturales y más.</p>
+                            <div class="product-price">$25.0</div>
+                            <div class="product-button" onclick="showGallery('maruchan-pikin')">Ver Ahora</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 2 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://imgs.search.brave.com/LNPYFzBWG0WjGH_RgP59L_W2-l1SGW5l4djapjdqpx0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzkzODI0My1NTE00/NTM5MDE2MTM3Ml8w/MzIwMjEtVi53ZWJw" alt="Auriculares Quantum">
+                        </div>
+                        <div class="product-content">
+                            <div class="product-category">FIDEOS INSTANTANEOS</div>
+                            <h3 class="product-name">MARUCHAN HABANERO</h3>
+                            <p class="product-description">El Sabor del Camarón, Limón, y Habanero, saborizantes naturales, verduras deshidratadas y más.</p>
+                            <div class="product-price">$25.0</div>
+                            <div class="product-button" onclick="showGallery('maruchan-habanero')">Ver Ahora</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 3 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://www.laranitadelapaz.com.mx/images/thumbs/0004944_te-sandia-listo-para-beber-24680-ml-arizona.jpeg" alt="Cámara Traveler">
+                        </div>
+                        <div class="product-content">
+                            <div class="product-category">ARIZONA</div>
+                            <h3 class="product-name">ARIZONA SANDIA</h3>
+                            <p class="product-description">Néctar sabor Sandía Lata 650ml.</p>
+                            <div class="product-price">$35.0</div>
+                            <div class="product-button" onclick="showGallery('arizona-sandia')">ver Ahora</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 4 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://imgs.search.brave.com/dsGzyg-ttCY01DIyCuY8mkOnQF84tI-WCyMwj8ePO0g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9OUV9OUF85/NzA5MTctTUxNNDY0/OTA4NDk0NzJfMDYy/MDIxLU8tYmViaWRh/LWRlLWZydXRhcy1h/cml6b25hLXNhYm9y/LXBvbmNoZS1kZS1m/cnV0YXMtZGUtNjgw/LW1sLndlYnA" alt="Cargador Solar">
+                        </div>
+                        <div class="product-content">
+                            <div class="product-category">ARIZONA</div>
+                            <h3 class="product-name">ARIZONA PONCHE DE FRUTAS</h3>
+                            <p class="product-description">ARIZONA PONCHE DE FRUTAS 680ML</p>
+                            <div class="product-price">$35.0</div>
+                            <div class="product-button" onclick="showGallery('arizona-ponche-de-frutas')">Ver Ahora</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de pedidos -->
+    <section id="pedidos" class="pedidos-section">
+        <div class="pedidos-container">
+            <div class="pedidos-header">
+                <h1><i class="fas fa-utensils"></i> Sistema de Pedidos lokochan</h1>
+                <p>Selecciona tu producto preferido entre Maruchas preparadas y arizonas</p>
+            </div>
+            
+            <div class="content">
+                <!-- Sección de productos -->
+                <div class="card">
+                    <h2><i class="fas fa-list"></i> Nuestros Productos Disponibles</h2>
+                    
+                    <div class="product-section">
+                        <h3><i class="fas fa-bowl-food"></i> Maruchans </h3>
+                        <div class="product-grid">
+                            <div class="product" data-id="maruchan-pikin" data-price="25" data-name="Maruchan pikin">
+                                <img class="product-img-sm" src="https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00004178900198L.jpg?odnHeight=612&odnWidth=612&odnBg=FFFFFFD">
+                                <h4>Maruchan Pikin</h4>
+                                <div class="price">$25</div>
+                                <div class="counter-controls">
+                                    <button class="counter-btn minus-btn" data-id="maruchan-pikin">-</button>
+                                    <span class="counter-value" data-id="maruchan-pikin">0</span>
+                                    <button class="counter-btn plus-btn" data-id="maruchan-pikin">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product" data-id="maruchan-habanero" data-price="25" data-name="Maruchan habanero">
+                                <img class="product-img-sm" src="https://http2.mlstatic.com/D_NQ_NP_2X_952289-MLU70064661897_062023-F.webp" alt="Maruchan habanero">
+                                <h4>Maruchan habanero</h4>
+                                <div class="price">$25</div>
+                                <div class="counter-controls">
+                                    <button class="counter-btn minus-btn" data-id="maruchan-habanero">-</button>
+                                    <span class="counter-value" data-id="maruchan-habanero">0</span>
+                                    <button class="counter-btn plus-btn" data-id="maruchan-habanero">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-section">
+                        <h3><i class="fas fa-glass-whiskey"></i> Arizona</h3>
+                        <div class="product-grid">
+                            <div class="product" data-id="arizona-sandia" data-price="35" data-name="Arizona sandia">
+                                <img class="product-img-sm" src="https://www.laranitadelapaz.com.mx/images/thumbs/0004944_te-sandia-listo-para-beber-24680-ml-arizona.jpeg" alt="Arizona sandia">
+                                <h4>Arizona de sandia</h4>
+                                <div class="price">$35</div>
+                                <div class="counter-controls">
+                                    <button class="counter-btn minus-btn" data-id="arizona-sandia">-</button>
+                                    <span class="counter-value" data-id="arizona-sandia">0</span>
+                                    <button class="counter-btn plus-btn" data-id="arizona-sandia">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product" data-id="arizona-ponche-de-frutas" data-price="35" data-name="Arizona ponche de frutas">
+                                <img class="product-img-sm" src="https://imgs.search.brave.com/dsGzyg-ttCY01DIyCuY8mkOnQF84tI-WCyMwj8ePO0g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9OUV9OUF85/NzA5MTctTUxNNDY0/OTA4NDk0NzJfMDYy/MDIxLU8tYmViaWRh/LWRlLWZydXRhcy1h/cml6b25hLXNhYm9y/LXBvbmNoZS1kZS1m/cnV0YXMtZGUtNjgw/LW1sLndlYnA" alt="Arizona ponche de frutas">
+                                <h4>Arizona ponche de frutas</h4>
+                                <div class="price">$35</div>
+                                <div class="counter-controls">
+                                    <button class="counter-btn minus-btn" data-id="arizona-ponche-de-frutas">-</button>
+                                    <span class="counter-value" data-id="arizona-ponche-de-frutas">0</span>
+                                    <button class="counter-btn plus-btn" data-id="arizona-ponche-de-frutas">+</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3><i class="fas fa-user"></i> Información del Cliente</h3>
+                        <div style="margin-top: 15px;">
+                            <label for="name">Nombre completo:</label>
+                            <input type="text" id="name" required placeholder="Tu nombre">
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <label for="phone">Teléfono:</label>
+                            <input type="tel" id="phone" required placeholder="Tu teléfono" pattern="[0-9]{10}">
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; background: #f1f8e9; padding: 15px; border-radius: 8px;">
+                        <h3><i class="fas fa-receipt"></i> Resumen del Pedido</h3>
+                        <div id="orderPreview" style="margin-top: 15px; padding: 10px; background: white; border-radius: 6px; min-height: 100px;">
+                            <p style="text-align: center; color: #6c757d; padding: 20px;">No hay productos seleccionados</p>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 15px; font-weight: bold; font-size: 1.2rem;">
+                            <span>Total:</span>
+                            <span id="totalAmount">$0</span>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="submitOrder" class="btn btn-submit" style="margin-top: 20px;">
+                        <i class="fas fa-paper-plane"></i> Enviar Pedido
+                    </button>
+                </div>
+                
+                <!-- Sección de administración-->
+                <div class="card admin-section">
+                    <h2><i class="fas fa-lock"></i> Área de Administración </h2>
+                    
+                    <p>Ingresa la contraseña para ver los pedidos registrados.</p>
+                    
+                    <div class="form-group password-input">
+                        <label for="adminPassword">Contraseña:</label>
+                        <input type="password" id="adminPassword" placeholder="Ingresa la contraseña">
+                        <span class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    
+                    <button class="btn btn-admin" id="viewOrdersBtn">
+                        <i class="fas fa-list"></i> Ver los Pedidos
+                    </button>
+                    
+                    <div id="orderSummary">
+                        <div class="no-orders">
+                            <i class="fas fa-lock"></i>
+                            <p>Ingresa la contraseña para poder ver los pedidos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-btn" onclick="showSection('inicio')">
+                <i class="fas fa-arrow-left"></i> Volver al inicio
+            </div>
+        </div>
+        
+        <div class="notification" id="notification" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span>Pedido enviado con éxito!</span>
+        </div>
+    </section>
+    
+    <!-- Sección de redes sociales -->
+    <section id="redes-sociales" class="socials-section">
+        <div class="container">
+            <h2 class="section-title">Nuestras Redes Sociales</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; font-size: 1.1rem;">
+                ¡Síguenos en nuestras redes sociales para estar al tanto de las últimas novedades, promociones y contenido exclusivo!
+            </p>
+            
+            <div class="social-grid">
+                <div class="social-card">
+                    <i class="fab fa-instagram social-icon"></i>
+                    <h3>Instagram</h3>
+                    <p>@lokochan_aribor</p>
+                    <a href="https://www.instagram.com/lokochan_aribor/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i> Seguir
+                    </a>
+                </div>
+                
+                <div class="social-card">
+                    <i class="fab fa-youtube social-icon"></i>
+                    <h3>youtube</h3>
+                    <p>Lokochan Aribor</p>
+                    <a href="https://www.youtube.com/@loKOOOCHAN" class="social-link">
+                        <i class="fab fa-youtube"></i> Seguir
+                    </a>
+                </div>
+                
+                <div class="social-card">
+                    <i class="fab fa-tiktok social-icon"></i>
+                    <h3>TikTok</h3>
+                    <p>@lokochan_aribor</p>
+                    <a href="https://www.tiktok.com/@lokochan_aribor?_t=ZS-8x60otBJvMN&_r=1" class="social-link">
+                        <i class="fab fa-tiktok"></i> Seguir
+                    </a>
+                </div>
+            </div>
+            
+            <h3 style="text-align: center; margin-top: 60px; margin-bottom: 20px;">Visítanos en el cbtis 102 ahi estaremos vendiendo nuestros productos temporales</h3>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1996.0952360868891!2d-96.71997868713125!3d18.9739491517444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2smx!4v1750554094346!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"lazy"></iframe>
+            </div>
+            
+            <div class="back-btn" onclick="showSection('inicio')" style="margin-top: 40px;">
+                <i class="fas fa-arrow-left"></i> Volver al inicio
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de referencias de galería -->
+    <section id="referencias" class="references-section">
+        <div class="references-container">
+            <h2 class="section-title">Referencias de Galería</h2>
+            
+            <div class="references-content">
+                <div class="video-container">
+                    <iframe src="https://youtube.com/shorts/2N928zbS-0w?feature=share" title="Video promocional" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                
+                <div class="gallery-column">
+                    <div class="gallery-header">
+                        <h1>Galería de Imágenes</h1>
+                        <p class="subtitle">Visualiza las imágenes de referencia de nuestros productos LOOKOS!!</p>
+                    </div>
+                    
+                    <div class="gallery-view">
+                        <img id="main-image" class="product-image" src="https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzdiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw" alt="Producto de referencia">
+                        
+                        <button class="nav-btn prev-btn" id="prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <button class="nav-btn next-btn" id="next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="image-counter">
+                            <span id="current-index">1</span> / <span id="total-images">10</span>
+                        </div>
+                    </div>
+                    
+                    <div class="thumbnails" id="thumbnails-container">
+                        <!-- Las miniaturas se generarán con JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-btn" onclick="showSection('inicio')" style="margin-top: 30px;">
+                <i class="fas fa-arrow-left"></i> Volver al inicio
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">LOKOCHAN ARIBOR</h3>
+                    <p>Ofreciendo los mejores productos de fideos instantáneos y bebidas desde 2020.</p>
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
+                        <li><a href="#" onclick="showSection('productos')">Productos</a></li>
+                        <li><a href="#" onclick="showSection('pedidos')">Hacer Pedido</a></li>
+                        <li><a href="#" onclick="showSection('redes-sociales')">Nuestras redes</a></li>
+                        <li><a href="#" onclick="showSection('referencias')">Referencias</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> paso del macho veracruz, local cbtis 102</li>
+                        <li><i class="fas fa-phone"></i> +52 998 231 5292</li>
+                        <li><i class="fas fa-envelope"></i> contacto@lokochan.com</li>
+                        <li><i class="fas fa-clock"></i> Lunes-Sábado: 9AM - 9PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 LOKOCHAN ARIBOR. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Función para mostrar secciones
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección solicitada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Desplazar hacia arriba
+            window.scrollTo(0, 0);
+        }
+        
+        // Función para mostrar la galería con las imágenes del producto seleccionado
+        function showGallery(productId) {
+            // Definir las imágenes para cada producto
+            const productImages = {
+                'maruchan-pikin': [
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzdiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw",
+                    "https://imgs.search.brave.com/j9i8sBYGjg5wOC-KHmUQyVcJHkrGebuawMa1zQYaSEU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzc5NDU5OC1NTEM4/NDc0NDU4MzM2OF8w/NTIwMjUtVi1maWRl/b3MtaW5zdGFudGFu/ZW9zLW1hcnVjaGFu/LWNhbWFyb24tY2hp/bGUtcGlxdWluLTY0/LWcud2VicA",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzbiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw",
+                    "https://imgs.search.brave.com/j9i8sBYGjg5wOC-KHmUQyVcJHkrGebuawMa1zQYaSEU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzc5NDU5OC1NTEM4/NDc0NDU4MzM2OF8w/NTIwMjUtVi1maWRl/b3MtaW5zdGFudGFu/ZW9zLW1hcnVjaGFu/LWNhbWFyb24tY2hp/bGUtcGlxdWluLTY0/LWcud2VicA"
+                ],
+                'maruchan-habanero': [
+                    "https://imgs.search.brave.com/LNPYFzBWG0WjGH_RgP59L_W2-l1SGW5l4djapjdqpx0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzkzODI0My1NTE00/NTM5MDE2MTM3Ml8w/MzIwMjEtVi53ZWJw",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzdiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw",
+                    "https://imgs.search.brave.com/LNPYFzBWG0WjGH_RgP59L_W2-l1SGW5l4djapjdqpx0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzkzODI0My1NTE00/NTM5MDE2MTM3Ml8w/MzIwMjEtVi53ZWJw",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzbiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw"
+                ],
+                'arizona-sandia': [
+                    "https://www.laranitadelapaz.com.mx/images/thumbs/0004944_te-sandia-listo-para-beber-24680-ml-arizona.jpeg",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzbiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw",
+                    "https://www.laranitadelapaz.com.mx/images/thumbs/0004944_te-sandia-listo-para-beber-24680-ml-arizona.jpeg",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzbiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw"
+                ],
+                'arizona-ponche-de-frutas': [
+                    "https://imgs.search.brave.com/dsGzyg-ttCY01DIyCuY8mkOnQF84tI-WCyMwj8ePO0g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9OUV9OUF85/NzA5MTctTUxNNDY0/OTA4NDk0NzJfMDYy/MDIxLU8tYmViaWRh/LWRlLWZydXRhcy1h/cml6b25hLXNhYm9y/LXBvbmNoZS1kZS1m/cnV0YXMtZGUtNjgw/LW1sLndlYnA",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzbiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw",
+                    "https://imgs.search.brave.com/dsGzyg-ttCY01DIyCuY8mkOnQF84tI-WCyMwj8ePO0g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9OUV9OUF85/NzA5MTctTUxNNDY0/OTA4NDk0NzJfMDYy/MDIxLU8tYmViaWRh/LWRlLWZydXRhcy1h/cml6b25hLXNhYm9y/LXBvbmNoZS1kZS1m/cnV0YXMtZGUtNjgw/LW1sLndlYnA",
+                    "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzbiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw"
+                ]
+            };
+            
+            // Guardar las imágenes para este producto
+            galleryImages = productImages[productId];
+            
+            // Actualizar la galería
+            initGallery();
+            
+            // Mostrar la sección de referencias
+            showSection('referencias');
+        }
+        
+        // Variables globales para la galería
+        let galleryImages = [];
+        let currentGalleryIndex = 0;
+        
+        // Elementos de la galería
+        const mainImage = document.getElementById('main-image');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentIndexElement = document.getElementById('current-index');
+        const totalImagesElement = document.getElementById('total-images');
+        const thumbnailsContainer = document.getElementById('thumbnails-container');
+        
+        // Inicializar la galería
+        function initGallery() {
+            // Limpiar miniaturas anteriores
+            thumbnailsContainer.innerHTML = '';
+            
+            // Establecer el total de imágenes
+            totalImagesElement.textContent = galleryImages.length;
+            
+            // Crear las miniaturas
+            galleryImages.forEach((img, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'thumbnail';
+                if (index === currentGalleryIndex) thumbnail.classList.add('active');
+                
+                thumbnail.innerHTML = `<img src="${img}" alt="Miniatura ${index + 1}">`;
+                
+                thumbnail.addEventListener('click', () => {
+                    setCurrentImage(index);
+                });
+                
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+            
+            // Actualizar la imagen principal
+            updateMainImage();
+        }
+        
+        // Actualizar la imagen principal
+        function updateMainImage() {
+            mainImage.src = galleryImages[currentGalleryIndex];
+            mainImage.alt = `Producto de referencia ${currentGalleryIndex + 1}`;
+            currentIndexElement.textContent = currentGalleryIndex + 1;
+            
+            // Actualizar miniaturas activas
+            document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                if (index === currentGalleryIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+        
+        // Establecer la imagen actual
+        function setCurrentImage(index) {
+            currentGalleryIndex = index;
+            updateMainImage();
+        }
+        
+        // Navegar a la imagen anterior
+        function prevImage() {
+            currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateMainImage();
+        }
+        
+        // Navegar a la siguiente imagen
+        function nextImage() {
+            currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+            updateMainImage();
+        }
+        
+        // Event listeners para la galería
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevImage();
+            } else if (e.key === 'ArrowRight') {
+                nextImage();
+            }
+        });
+        
+        // Inicializar la galería con imágenes por defecto
+        window.addEventListener('load', () => {
+            galleryImages = [
+                "https://imgs.search.brave.com/8mvLBDuNDKEOpgiecl-FCG--jdr0dIz29URinTuHfPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2ZkL2Jk/LzdiL2ZkYmQ3YjVh/ZDFiMzY0MTg5ZWY4/Y2IxODY1Nzc5M2Yx/LmpwZw",
+                "https://imgs.search.brave.com/j9i8sBYGjg5wOC-KHmUQyVcJHkrGebuawMa1zQYaSEU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzc5NDU5OC1NTEM4/NDc0NDU4MzM2OF8w/NTIwMjUtVi1maWRl/b3MtaW5zdGFudGFu/ZW9zLW1hcnVjaGFu/LWNhbWFyb24tY2hp/bGUtcGlxdWluLTY0/LWcud2VicA",
+                "https://imgs.search.brave.com/LNPYFzBWG0WjGH_RgP59L_W2-l1SGW5l4djapjdqpx0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzkzODI0My1NTE00/NTM5MDE2MTM3Ml8w/MzIwMjEtVi53ZWJw",
+                "https://www.laranitadelapaz.com.mx/images/thumbs/0004944_te-sandia-listo-para-beber-24680-ml-arizona.jpeg",
+                "https://imgs.search.brave.com/dsGzyg-ttCY01DIyCuY8mkOnQF84tI-WCyMwj8ePO0g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9OUV9OUF85/NzA5MTctTUxNNDY0/OTA8NDk0NzJfMDYy/MDIxLU8tYmViaWRh/LWRlLWZydXRhcy1h/cml6b25hLXNhYm9y/LXBvbmNoZS1kZS1m/cnV0YXMtZGUtNjgw/LW1sLndlYnA",
+                "https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00004178900198L.jpg?odnHeight=612&odnWidth=612&odnBg=FFFFFFD",
+                "https://http2.mlstatic.com/D_NQ_NP_2X_952289-MLU70064661897_062023-F.webp"
+            ];
+            initGallery();
+        });
+        
+        // Sistema de pedidos
+        // Datos de productos
+        const products = {
+            'maruchan-pikin': { name: 'Maruchan Pikin', price: 25 },
+            'maruchan-habanero': { name: 'Maruchan habanero', price: 25 },
+            'arizona-sandia': { name: 'Arizona sandia', price: 35 },
+            'arizona-ponche-de-frutas': { name: 'Arizona ponche de frutas', price: 35 }
+        };
+        
+        // Variables globales
+        let selectedProducts = {};
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const ADMIN_PASSWORD = "admin123";
+        
+        // Iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cargar pedidos existentes
+            const savedOrders = localStorage.getItem('orders');
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+            }
+            
+            // Inicializar contadores
+            Object.keys(products).forEach(id => {
+                selectedProducts[id] = 0;
+            });
+            
+            // Configurar eventos de los botones de contador
+            document.querySelectorAll('.plus-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const productId = btn.dataset.id;
+                    selectedProducts[productId]++;
+                    updateCounter(productId);
+                    updateOrderPreview();
+                });
+            });
+            
+            document.querySelectorAll('.minus-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const productId = btn.dataset.id;
+                    if (selectedProducts[productId] > 0) {
+                        selectedProducts[productId]--;
+                        updateCounter(productId);
+                        updateOrderPreview();
+                    }
+                });
+            });
+            
+            // Envío del pedido
+            document.getElementById('submitOrder').addEventListener('click', submitOrder);
+            
+            // Mostrar/ocultar contraseña
+            document.getElementById('togglePassword').addEventListener('click', togglePasswordVisibility);
+            
+            // Ver pedidos (admin)
+            document.getElementById('viewOrdersBtn').addEventListener('click', viewOrders);
+        });
+        
+        // Actualizar el contador visual
+        function updateCounter(productId) {
+            const counter = document.querySelector(`.counter-value[data-id="${productId}"]`);
+            if (counter) {
+                counter.textContent = selectedProducts[productId];
+                
+                // Resaltar el producto si tiene cantidad > 0
+                const productCard = counter.closest('.product');
+                if (selectedProducts[productId] > 0) {
+                    productCard.classList.add('selected');
+                } else {
+                    productCard.classList.remove('selected');
+                }
+            }
+        }
+        
+        // Actualizar vista previa del pedido
+        function updateOrderPreview() {
+            const orderPreview = document.getElementById('orderPreview');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            let hasProducts = false;
+            let total = 0;
+            let html = '';
+            
+            Object.keys(selectedProducts).forEach(id => {
+                if (selectedProducts[id] > 0) {
+                    hasProducts = true;
+                    const product = products[id];
+                    const subtotal = product.price * selectedProducts[id];
+                    total += subtotal;
+                    
+                    html += `
+                        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+                            <div>
+                                <span style="font-weight: bold;">${product.name}</span>
+                                <div style="display: flex; gap: 10px; margin-top: 5px;">
+                                    <button class="counter-btn minus-btn-sm" data-id="${id}" style="width: 25px; height: 25px; font-size: 0.8rem;">-</button>
+                                    <span>${selectedProducts[id]}</span>
+                                    <button class="counter-btn plus-btn-sm" data-id="${id}" style="width: 25px; height: 25px; font-size: 0.8rem;">+</button>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div>$${product.price.toFixed(2)} c/u</div>
+                                <div style="font-weight: bold;">$${subtotal.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (hasProducts) {
+                orderPreview.innerHTML = html;
+                
+                // Agregar botones pequeños
+                document.querySelectorAll('.plus-btn-sm').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const productId = btn.dataset.id;
+                        selectedProducts[productId]++;
+                        updateCounter(productId);
+                        updateOrderPreview();
+                    });
+                });
+                
+                document.querySelectorAll('.minus-btn-sm').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const productId = btn.dataset.id;
+                        if (selectedProducts[productId] > 0) {
+                            selectedProducts[productId]--;
+                            updateCounter(productId);
+                            updateOrderPreview();
+                        }
+                    });
+                });
+            } else {
+                orderPreview.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 20px;">No hay productos seleccionados</p>';
+            }
+            
+            totalAmount.textContent = `$${total.toFixed(2)}`;
+        }
+        
+        // Manejar envío del pedido
+        function submitOrder() {
+            // Validar selección de productos
+            let hasProducts = false;
+            Object.values(selectedProducts).forEach(qty => {
+                if (qty > 0) hasProducts = true;
+            });
+            
+            if (!hasProducts) {
+                showNotification('Por favor selecciona al menos un producto', 'error');
+                return;
+            }
+            
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            // Validar campos
+            if (!name || !phone) {
+                showNotification('Por favor completa todos los campos', 'error');
+                return;
+            }
+            
+            // Validar formato de teléfono
+            if (!/^\d{10}$/.test(phone)) {
+                showNotification('El teléfono debe tener 10 dígitos', 'error');
+                return;
+            }
+            
+            // Crear objeto de pedido
+            const orderProducts = [];
+            Object.keys(selectedProducts).forEach(id => {
+                if (selectedProducts[id] > 0) {
+                    orderProducts.push({
+                        id: id,
+                        name: products[id].name,
+                        price: products[id].price,
+                        quantity: selectedProducts[id]
+                    });
+                }
+            });
+            
+            const order = {
+                id: Date.now(),
+                customer: name,
+                phone: phone,
+                products: orderProducts,
+                total: calculateTotal(),
+                date: new Date().toLocaleString('es-MX', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                timestamp: Date.now()
+            };
+            
+            // Guardar pedido
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // Mostrar notificación
+            showNotification('Pedido enviado con éxito!');
+            
+            // Resetear formulario
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            
+            // Resetear selección de productos
+            Object.keys(selectedProducts).forEach(id => {
+                selectedProducts[id] = 0;
+                updateCounter(id);
+            });
+            updateOrderPreview();
+        }
+        
+        // Calcular el total del pedido
+        function calculateTotal() {
+            return Object.keys(selectedProducts).reduce((total, id) => 
+                total + (products[id].price * selectedProducts[id]), 0);
+        }
+        
+        // Mostrar/ocultar la contraseña
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('adminPassword');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        }
+        
+        // Ver pedidos (admin)
+        function viewOrders() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password !== ADMIN_PASSWORD) {
+                showNotification('Contraseña incorrecta', 'error');
+                return;
+            }
+            
+            displayOrders();
+        }
+        
+        // Mostrar pedidos en el panel de administración
+        function displayOrders() {
+            const orderSummary = document.getElementById('orderSummary');
+            
+            if (orders.length === 0) {
+                orderSummary.innerHTML = `
+                    <div class="no-orders">
+                        <i class="fas fa-inbox"></i>
+                        <p>No hay pedidos registrados</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            let grandTotal = 0;
+            
+            // Ordenar pedidos por fecha (más recientes, primero)
+            const sortedOrders = [...orders].sort((a, b) => b.timestamp - a.timestamp);
+            
+            sortedOrders.forEach(order => {
+                grandTotal += order.total;
+                
+                // Listar productos del pedido
+                const productsList = order.products.map(p => 
+                    `${p.name} (${p.quantity} x $${p.price})`
+                ).join(', ');
+                
+                html += `
+                    <div class="order-item">
+                        <div class="order-info">
+                            <div class="order-customer">${order.customer} (${order.phone})</div>
+                            <div class="order-products">${productsList}</div>
+                        </div>
+                        <div class="order-meta">
+                            <div class="order-price">$${order.total.toFixed(2)}</div>
+                            <div class="order-date">${order.date}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div class="order-total">
+                    <span>Total general:</span>
+                    <span>$${grandTotal.toFixed(2)}</span>
+                </div>
+            `;
+            
+            orderSummary.innerHTML = html;
+        }
+        
+        // Mostrar las notificaciónes
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const icon = notification.querySelector('i');
+            const text = notification.querySelector('span');
+            
+            // Configurar según el tipo
+            if (type === 'error') {
+                notification.style.backgroundColor = 'var(--danger)';
+                icon.className = 'fas fa-exclamation-circle';
+            } else {
+                notification.style.backgroundColor = 'var(--success)';
+                icon.className = 'fas fa-check-circle';
+            }
+            
+            text.textContent = message;
+            notification.style.display = 'flex';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
